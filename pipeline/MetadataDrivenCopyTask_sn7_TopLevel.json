@@ -9,7 +9,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Set variable1",
+						"activity": "SetWindowsStart",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -110,7 +110,7 @@
 				}
 			},
 			{
-				"name": "Set variable1",
+				"name": "SetWindowsStart",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"userProperties": [],

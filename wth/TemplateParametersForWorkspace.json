@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "wth"
+		},
+		"Advworks_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=jbenderwest.database.windows.net;Initial Catalog=AdventureWorksLT;User ID=DemoUser"
+		},
+		"control_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=hack04.database.windows.net;Initial Catalog=ControlDB;User ID=someadmin"
+		},
+		"wth-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:wth.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"hackkeyv_properties_typeProperties_baseUrl": {
+			"value": "https://hackkeyv.vault.azure.net/"
+		},
+		"wth-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://whatthehackwgb.dfs.core.windows.net"
+		},
+		"Trigger_sn7_properties_MetadataDrivenCopyTask_sn7_TopLevel_parameters_windowStart": {
+			"value": "@trigger().scheduledTime"
+		}
+	}
+}

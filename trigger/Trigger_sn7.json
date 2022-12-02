@@ -1,0 +1,31 @@
+{
+	"name": "Trigger_sn7",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "MetadataDrivenCopyTask_sn7_TopLevel",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"windowStart": {
+						"type": "Expression",
+						"value": "@trigger().scheduledTime"
+					}
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 24,
+				"startTime": "2022-12-02T21:11:00Z",
+				"endTime": "2022-12-04T00:11:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

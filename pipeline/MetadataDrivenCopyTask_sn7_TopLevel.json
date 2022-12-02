@@ -7,7 +7,14 @@
 				"name": "GetSumOfObjectsToCopy",
 				"description": "Count the total number of objects (tables etc.) required to be copied in this run.",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -93,13 +100,26 @@
 										"type": "Expression"
 									},
 									"windowStart": {
-										"value": "@pipeline().parameters.windowStart",
+										"value": "@variables('vwindowstart')",
 										"type": "Expression"
 									}
 								}
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "vwindowstart",
+					"value": {
+						"value": "@utcnow()",
+						"type": "Expression"
+					}
 				}
 			}
 		],
@@ -117,6 +137,11 @@
 				"defaultValue": "dbo.maincontroltable"
 			},
 			"windowStart": {
+				"type": "String"
+			}
+		},
+		"variables": {
+			"vwindowstart": {
 				"type": "String"
 			}
 		},

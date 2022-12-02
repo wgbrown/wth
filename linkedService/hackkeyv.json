@@ -1,0 +1,11 @@
+{
+	"name": "hackkeyv",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://hackkeyv.vault.azure.net/"
+		}
+	}
+}

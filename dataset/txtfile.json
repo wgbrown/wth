@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "address/new",
-				"folderPath": "advworks",
+				"fileName": "address.csv",
+				"folderPath": "advworks/address/new",
 				"fileSystem": "bronze"
 			},
 			"columnDelimiter": ",",

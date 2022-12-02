@@ -1,0 +1,22 @@
+{
+	"name": "control",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=hack04.database.windows.net;Initial Catalog=ControlDB;User ID=someadmin",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "hackkeyv",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "controldb"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

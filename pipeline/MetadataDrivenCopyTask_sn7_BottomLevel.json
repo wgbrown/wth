@@ -304,7 +304,7 @@
 												},
 												"userProperties": [],
 												"typeProperties": {
-													"storedProcedureName": "[dbo].[UpdateWatermarkColumnValue_sn7]",
+													"storedProcedureName": "[dbo].[UpdateWatermarkColumnValue]",
 													"storedProcedureParameters": {
 														"Id": {
 															"value": {

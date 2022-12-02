@@ -121,7 +121,7 @@
 																"type": "Expression"
 															},
 															"cw_folderPath": {
-																"value": "advworks/@{formatDateTime(pipeline().parameters.windowStart,'yy')}/@{formatDateTime(pipeline().parameters.windowStart,'MM')}/@{formatDateTime(pipeline().parameters.windowStart,'dd')}",
+																"value": "@json(item().SinkObjectSettings).folderName",
 																"type": "Expression"
 															},
 															"cw_fileSystem": {
@@ -273,7 +273,7 @@
 																"type": "Expression"
 															},
 															"cw_folderPath": {
-																"value": "advworks/@{formatDateTime(pipeline().parameters.windowStart,'yy')}/@{formatDateTime(pipeline().parameters.windowStart,'MM')}/@{formatDateTime(pipeline().parameters.windowStart,'dd')}",
+																"value": "@{json(item().SinkObjectSettings).folderName}/@{formatDateTime(pipeline().parameters.windowStart,'yy')}/@{formatDateTime(pipeline().parameters.windowStart,'MM')}/@{formatDateTime(pipeline().parameters.windowStart,'dd')}",
 																"type": "Expression"
 															},
 															"cw_fileSystem": {

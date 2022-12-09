@@ -1,11 +1,10 @@
 {
 	"name": "Advworks",
-	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=jbenderwest.database.windows.net;Initial Catalog=AdventureWorksLT;User ID=DemoUser",
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=manuf.database.windows.net;Initial Catalog=advworkslight;User ID=wgb",
 			"password": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
@@ -19,5 +18,6 @@
 			"referenceName": "AutoResolveIntegrationRuntime",
 			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.Synapse/workspaces/linkedservices"
 }

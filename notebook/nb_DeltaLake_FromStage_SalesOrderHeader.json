@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "6dd9f883-0c57-4912-8220-cfd41f93e582"
+				"spark.autotune.trackingId": "0245ffee-8cd0-4923-9461-d80101efb6ee"
 			}
 		},
 		"metadata": {
@@ -64,7 +64,7 @@
 					"df = spark.read.load(bronze_root + 'SalesOrderHeader/SalesOrderHeader.parquet', format='parquet')\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 1
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",

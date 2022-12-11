@@ -1,0 +1,167 @@
+{
+	"name": "nb_DeltaLake_FromStage_SalesOrderHeader",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "wthspark",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "6dd9f883-0c57-4912-8220-cfd41f93e582"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/fa1477dd-824c-44b2-aff7-1fa9d7f30154/resourceGroups/hack-a-thon-rg/providers/Microsoft.Synapse/workspaces/wth/bigDataPools/wthspark",
+				"name": "wthspark",
+				"type": "Spark",
+				"endpoint": "https://wth.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/wthspark",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.2",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": false
+					},
+					"collapsed": false
+				},
+				"source": [
+					"# Use the magic notation %%pyspark if default language is something other than PySpark....\r\n",
+					"# Load a file into a dataframe\r\n",
+					"# df = spark.read.load('/stage/mydata.csv', format='csv', header=True)\r\n",
+					"bronze_root='abfss://bronze@whatthehackwgb.dfs.core.windows.net/advworks/' \r\n",
+					"df = spark.read.load(bronze_root + 'SalesOrderHeader/SalesOrderHeader.parquet', format='parquet')\r\n",
+					"display(df.limit(10))"
+				],
+				"execution_count": 1
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Save the dataframe as a delta table\r\n",
+					" \r\n",
+					"delta_root = 'abfss://silver@whatthehackwgb.dfs.core.windows.net/advworks/'\r\n",
+					"delta_table_path = delta_root + \"SalesOrderHeader\"\r\n",
+					""
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#delta_table_path\r\n",
+					"df.write.format(\"delta\").save(delta_table_path)"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"from delta.tables import *\r\n",
+					"deltaTable = DeltaTable.forPath(spark,delta_table_path) \r\n",
+					"\r\n",
+					"df_bronze = spark.read.load(bronze_root + 'SalesOrderHeader/SalesOrderHeader.parquet', format='parquet')\r\n",
+					"\r\n",
+					"\r\n",
+					"deltaTable.alias(\"target\").merge(\r\n",
+					"     source = df_bronze.alias(\"source\"),\r\n",
+					"     condition = \"source.SalesOrderID = target.SalesOrderID \"\r\n",
+					"    ).whenMatchedUpdate(\r\n",
+					"    set = {\r\n",
+					"   \t      \r\n",
+					"    }\r\n",
+					"    ).whenNotMatchedInsert( values = \r\n",
+					"    {}\r\n",
+					"    ).execute()\r\n",
+					"\r\n",
+					"\r\n",
+					"deltaTable.toDF().show()"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# https://learn.microsoft.com/en-us/training/modules/use-delta-lake-azure-synapse-analytics/3-create-delta-tables\r\n",
+					"# More about how to overwrite, insert, and conditionally update..."
+				],
+				"execution_count": null
+			}
+		]
+	}
+}

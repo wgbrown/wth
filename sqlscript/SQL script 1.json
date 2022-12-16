@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": " \n\nDROP VIEW IF EXISTS DimCustomer;\nGO\n\n \n\nCREATE VIEW DimCustomer AS\nSELECT * \nFROM \nOPENROWSET(\n        BULK 'silver/advworks/Customer',\n        DATA_SOURCE = 'SqlOnDemandMI',\n        FORMAT = 'delta'\n    ) \n  AS [Customer]; \n\nSELECT * FROM DimCustomer  \n\n\n\nDROP VIEW IF EXISTS DimCustomer;\nGO\n\n \n\nCREATE VIEW DimAddress AS\nSELECT * \nFROM \nOPENROWSET(\n        BULK 'silver/advworks/Address',\n        DATA_SOURCE = 'SqlOnDemandMI',\n        FORMAT = 'delta'\n    ) \n  AS [Address]; \n\nSELECT * FROM DimAddress  \n\n\nCREATE VIEW DimCustomerAddress AS\nSELECT * \nFROM \nOPENROWSET(\n        BULK 'silver/advworks/CustomerAddress',\n        DATA_SOURCE = 'SqlOnDemandMI',\n        FORMAT = 'delta'\n    ) \n  AS [CustomerAddress]; \n\nSELECT * FROM DimCustomerAddress  \n\nCREATE VIEW FactSalesOrderDetail AS\nSELECT * \nFROM \nOPENROWSET(\n        BULK 'silver/advworks/SalesOrderDetail',\n        DATA_SOURCE = 'SqlOnDemandMI',\n        FORMAT = 'delta'\n    ) \n  AS [SalesOrderDetail]; \n\nSELECT * FROM FactSalesOrderDetail  \n\n\nCREATE VIEW FactSalesOrderHeader AS\nSELECT * \nFROM \nOPENROWSET(\n        BULK 'silver/advworks/SalesOrderHeader',\n        DATA_SOURCE = 'SqlOnDemandMI',\n        FORMAT = 'delta'\n    ) \n  AS [SalesOrderHeader]; \n\nSELECT * FROM FactSalesOrderHeader\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "wth",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

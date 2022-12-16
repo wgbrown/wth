@@ -5,15 +5,8 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=jbenderwest.database.windows.net;Initial Catalog=AdventureWorksLT;User ID=DemoUser",
-			"password": {
-				"type": "AzureKeyVaultSecret",
-				"store": {
-					"referenceName": "hackkeyv",
-					"type": "LinkedServiceReference"
-				},
-				"secretName": "advworks"
-			}
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=manuf.database.windows.net;initial catalog=advworkslight;user id=wgb",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNZTkFQU0VARjdEMzVDNjEtMDNFMi00MkQ4LUI3QjgtQzExQTExQjMxNjU0XzQ5ZGViMWM1LTY3MmItNGJiMi1hZjc2LWIyNGYwZTczODAyYSINCn0="
 		},
 		"connectVia": {
 			"referenceName": "AutoResolveIntegrationRuntime",

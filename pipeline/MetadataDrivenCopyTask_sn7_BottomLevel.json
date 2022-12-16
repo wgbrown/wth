@@ -451,6 +451,8 @@
 		"folder": {
 			"name": "MetadataDrivenCopyTask_sn7_20221202"
 		},
-		"annotations": []
-	}
+		"annotations": [],
+		"lastPublishTime": "2022-12-02T23:06:27Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
 }

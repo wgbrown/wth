@@ -1,5 +1,6 @@
 {
 	"name": "control",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
